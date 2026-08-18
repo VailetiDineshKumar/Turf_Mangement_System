@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public interface SlotRepository extends JpaRepository<Slot, Long> {
 
     List<Slot> findByBookedFalse();
 
+    boolean existsByDateAndStartTime(LocalDate date, LocalTime startTime);
     /**
      * Locks the slot row for the duration of the transaction (SELECT ... FOR UPDATE).
      * Used by BookingService when creating a booking so two concurrent requests
